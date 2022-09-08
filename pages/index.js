@@ -5,7 +5,7 @@ import {
   Divider, Grid, Modal, Stack
 } from "@mui/material";
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import ProductForm from "../components/ProductForm";
 import ProductsListContainer from "../components/ProductsContainer";
 import SearchBar from "../components/SearchBar";
@@ -17,6 +17,8 @@ const API_URL= process.env.NEXT_PUBLIC_API_URL;
 export default function Home() {
   const {
     isDesktop,
+    loading,
+    setLoading,
     products,
     setProducts,
     addProductModalOpen,
@@ -26,8 +28,6 @@ export default function Home() {
     editProductModalOpen,
     setEditProductOpen,
   } = useContext(AppContext);
-
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchAPI = async () => {

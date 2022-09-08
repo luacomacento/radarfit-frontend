@@ -13,7 +13,7 @@ const style = {
 };
 
 const AddProduct = forwardRef((props, ref) => {
-  const { products, selectedProduct, setSelectedProduct, setProducts, setAddProductOpen, setEditProductOpen} = useContext(AppContext);
+  const { products, setLoading, selectedProduct, setSelectedProduct, setProducts, setAddProductOpen, setEditProductOpen} = useContext(AppContext);
   const [name, setName] = useState(
     props.editMode ? selectedProduct.produto : '');
   const [price, setPrice] = useState(
@@ -24,6 +24,7 @@ const AddProduct = forwardRef((props, ref) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     if (props.editMode) {
       const updatedProduct = {
         produto: name,
@@ -49,6 +50,7 @@ const AddProduct = forwardRef((props, ref) => {
       setProducts([...products, data]);
     }
     
+    setLoading(false);
     setName('');
     setPrice('');
     setDescription('');

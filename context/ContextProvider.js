@@ -5,6 +5,7 @@ import AppContext from './AppContext';
 
 function ContextProvider({ children }) {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState();
   const [addProductModalOpen, setAddProductOpen] = useState(false);
   const [singleProductModalOpen, setSingleProductOpen] = useState(false);
@@ -14,6 +15,8 @@ function ContextProvider({ children }) {
 
   const contextValue = {
     isDesktop,
+    loading,
+    setLoading,
     products,
     setProducts,
     selectedProduct,

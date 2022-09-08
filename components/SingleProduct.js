@@ -10,14 +10,16 @@ import ProductCard from './ProductCard';
 const API_URL= process.env.NEXT_PUBLIC_API_URL;
 
 const SingleProduct = forwardRef((props, ref) => {
-  const { selectedProduct, setSelectedProduct, setProducts, setEditProductOpen} = useContext(AppContext);
+  const { selectedProduct, setSelectedProduct, setProducts, setEditProductOpen, setLoading } = useContext(AppContext);
 
   const handleDelete = async () => {
+    setLoading(true);
     const { id } = selectedProduct;
     await axios.delete(`${API_URL}/produtos/${id}`);
     const { data } = await axios.get(`${API_URL}/produtos/`);
     setProducts(data);
     setSelectedProduct();
+    setLoading(false);
   };
 
   if (!selectedProduct) return (
