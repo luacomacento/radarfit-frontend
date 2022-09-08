@@ -1,7 +1,26 @@
-import '../styles/globals.css'
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { ThemeProvider as StyledProvider } from 'styled-components';
+import ContextProvider from '../context/ContextProvider';
+import theme from '../styles/theme';
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <ContextProvider>
+      <StyledProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </StyledProvider>
+    </ContextProvider>
+  );
 }
 
-export default MyApp
+MyApp.propTypes = {
+  Component: PropTypes.elementType.isRequired,
+  pageProps: PropTypes.object
+};
+
+export default MyApp;
